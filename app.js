@@ -3,45 +3,34 @@ const products = [
     id: '1',
     name: 'BrainStorm Cloudberry',
     price: '4990 ₽',
-    description: 'Инновационный продукт для улучшения когнитивных функций, концентрации и памяти.',
+    description: 'Повышает концентрацию и ясность мышления.',
+    image: 'https://ewaproduct.com/media/catalog/product/cache/...cloudberry.jpg',
     link: 'https://ewaproduct.com/ru/product/brainstorm-cloudberry'
   },
   {
     id: '2',
-    name: 'BrainStorm со вкусом Вишни',
+    name: 'BrainStorm Cherry',
     price: '4990 ₽',
-    description: 'Тонизирующий напиток с экстрактом гриба ежовика, готу кола, женьшень и витаминами группы B.',
+    description: 'Энергия и фокус со вкусом вишни.',
+    image: 'https://ewaproduct.com/media/catalog/product/cache/...cherry.jpg',
     link: 'https://ewaproduct.com/ru/product/brainstorm-so-vkusom-vishni'
-  }
+  },
+  // в будущем добавишь сюда новые товары
 ];
 
-const productList = document.getElementById('product-list');
-const productDetails = document.getElementById('product-details');
+const grid = document.getElementById('product-grid');
 
-// Показываем список продуктов
 products.forEach(p => {
-  const btn = document.createElement('button');
-  btn.textContent = p.name;
-  btn.onclick = () => showDetails(p);
-  productList.appendChild(btn);
-});
-
-function showDetails(product) {
-  productList.style.display = 'none';
-  productDetails.style.display = 'block';
-  productDetails.innerHTML = `
-    <h2>${product.name}</h2>
-    <p>${product.description}</p>
-    <p>Цена: ${product.price}</p>
-    <a href="${product.link}" target="_blank">
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <img src="${p.image}" alt="${p.name}">
+    <h3>${p.name}</h3>
+    <p>${p.description}</p>
+    <div class="price">${p.price}</div>
+    <a href="${p.link}" target="_blank">
       <button>Купить 💳</button>
     </a>
-    <br/><br/>
-    <button onclick="backToList()">Назад к выбору</button>
   `;
-}
-
-function backToList() {
-  productDetails.style.display = 'none';
-  productList.style.display = 'block';
-}
+  grid.appendChild(card);
+});
